@@ -118,8 +118,8 @@ router.post('/submit-files', kycUpload.fields([
           email: user.email,
           documentType: documentType,
           submittedAt: new Date().toLocaleString(),
-          platformName: settings?.platformName || 'SCW',
-          supportEmail: settings?.supportEmail || 'support@SCW.com',
+          platformName: settings?.platformName || 'Extrede',
+          supportEmail: settings?.supportEmail || 'support@Extrede.com',
           year: new Date().getFullYear().toString()
         })
       }
@@ -200,8 +200,8 @@ router.post('/submit', async (req, res) => {
           email: user.email,
           documentType: documentType,
           submittedAt: new Date().toLocaleString(),
-          platformName: settings?.platformName || 'SCW',
-          supportEmail: settings?.supportEmail || 'support@SCW.com',
+          platformName: settings?.platformName || 'Extrede',
+          supportEmail: settings?.supportEmail || 'support@Extrede.com',
           year: new Date().getFullYear().toString()
         })
       }
@@ -357,9 +357,9 @@ router.put('/approve/:kycId', async (req, res) => {
           email: user.email,
           documentType: kyc.documentType,
           approvedAt: new Date().toLocaleString(),
-          platformName: settings?.platformName || 'SCW',
-          loginUrl: settings?.loginUrl || 'https://SCW.com/login',
-          supportEmail: settings?.supportEmail || 'support@SCW.com',
+          platformName: settings?.platformName || 'Extrede',
+          loginUrl: settings?.loginUrl || 'https://Extrede.com/login',
+          supportEmail: settings?.supportEmail || 'support@Extrede.com',
           year: new Date().getFullYear().toString()
         })
         console.log('KYC approved email result:', emailResult)
@@ -421,9 +421,9 @@ router.put('/reject/:kycId', async (req, res) => {
           documentType: kyc.documentType,
           rejectionReason: kyc.rejectionReason,
           rejectedAt: new Date().toLocaleString(),
-          platformName: settings?.platformName || 'SCW',
-          loginUrl: settings?.loginUrl || 'https://SCW.com/login',
-          supportEmail: settings?.supportEmail || 'support@SCW.com',
+          platformName: settings?.platformName || 'Extrede',
+          loginUrl: settings?.loginUrl || 'https://Extrede.com/login',
+          supportEmail: settings?.supportEmail || 'support@Extrede.com',
           year: new Date().getFullYear().toString()
         })
       }

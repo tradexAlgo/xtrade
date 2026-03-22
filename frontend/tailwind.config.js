@@ -10,14 +10,14 @@ export default {
     extend: {
       colors: {
         burgundy: {
-          DEFAULT: '#6c0e2a',
-          dark: '#4a0a1d',
-          light: '#8a1236',
+          DEFAULT: '#FCE205',
+          dark: '#F0B90B',
+          light: '#FDE047',
         },
         crimson: {
-          DEFAULT: '#d41a33',
-          dark: '#a31428',
-          light: '#e85d75',
+          DEFAULT: '#F0B90B',
+          dark: '#EAB308',
+          light: '#FEF08A',
         },
         dark: {
           900: 'var(--theme-bgPrimary, #0a0a0a)',
@@ -44,14 +44,14 @@ export default {
           loss: 'var(--theme-lossColor, #EF4444)',
         },
         burgundy: {
-          DEFAULT: '#6c0e2a',
-          light: '#d41a33',
-          dark: '#4a0a1d',
+          DEFAULT: '#FCE205',
+          light: '#FDE047',
+          dark: '#F0B90B',
         },
         crimson: {
-          DEFAULT: '#d41a33',
-          light: '#e85d75',
-          dark: '#a31428',
+          DEFAULT: '#F0B90B',
+          light: '#FEF08A',
+          dark: '#EAB308',
         },
         primary: {
           50: '#fef2f2',

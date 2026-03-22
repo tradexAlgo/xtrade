@@ -150,7 +150,7 @@ const InstructionsPage = () => {
           onMouseLeave={() => setSidebarExpanded(false)}
         >
           <div className="p-4 flex items-center justify-center">
-            <img src={isDarkMode ? "/scw-logo.png" : "/scw-logo.png"} alt="SCW" className="h-8 w-auto object-contain" />
+            <img src={isDarkMode ? "/extrede-logo.png" : "/extrede-logo.png"} alt="Extrede" className="h-8 w-auto object-contain" />
           </div>
           <nav className="flex-1 px-2">
             {menuItems.map((item) => (
@@ -196,7 +196,7 @@ const InstructionsPage = () => {
                   <BookOpen size={isMobile ? 20 : 28} className="text-accent-green" />
                 </div>
                 <div>
-                  <h2 className={`font-bold text-white ${isMobile ? 'text-base' : 'text-xl'}`}>Welcome to SCW</h2>
+                  <h2 className={`font-bold text-white ${isMobile ? 'text-base' : 'text-xl'}`}>Welcome to Extrede</h2>
                   <p className={`text-gray-400 ${isMobile ? 'text-xs' : ''}`}>Learn how to use our platform</p>
                 </div>
               </div>

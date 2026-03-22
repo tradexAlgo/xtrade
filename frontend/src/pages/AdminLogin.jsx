@@ -60,8 +60,8 @@ const AdminLogin = () => {
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <img
-            src="/scw-logo.png"
-            alt="SCW Logo"
+            src="/extrede-logo.png"
+            alt="Extrede Logo"
             className="h-16 w-auto object-contain"
           />
         </div>

@@ -146,7 +146,7 @@ const AdminPaymentMethods = () => {
     <div className="min-h-screen bg-dark-900 flex">
       <aside className={`${sidebarExpanded ? 'w-52' : 'w-16'} bg-dark-900 border-r border-gray-800 flex flex-col transition-all duration-300`} onMouseEnter={() => setSidebarExpanded(true)} onMouseLeave={() => setSidebarExpanded(false)}>
         <div className="p-4 flex items-center justify-center gap-2">
-          <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center"><span className="text-white font-bold text-sm">A</span></div>
+          <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center"><span className="text-black font-bold text-sm">A</span></div>
           {sidebarExpanded && <span className="text-white font-semibold">Admin</span>}
         </div>
         <nav className="flex-1 px-2">

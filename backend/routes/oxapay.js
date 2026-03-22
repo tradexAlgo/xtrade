@@ -84,8 +84,8 @@ router.post('/create-payment', async (req, res) => {
     await wallet.save()
 
     // Create OxaPay invoice
-    const backendUrl = process.env.BACKEND_URL || 'https://scw.com/api'
-    const frontendUrl = process.env.FRONTEND_URL || 'https://scw.com'
+    const backendUrl = process.env.BACKEND_URL || 'https://extrede.com/api'
+    const frontendUrl = process.env.FRONTEND_URL || 'https://extrede.com'
     const callbackUrl = `${backendUrl}/api/oxapay/webhook`
     const returnUrl = `${frontendUrl}/wallet?deposit=success`
 
@@ -98,7 +98,7 @@ router.post('/create-payment', async (req, res) => {
       callback_url: callbackUrl,
       return_url: returnUrl,
       order_id: transaction._id.toString(),
-      description: `SCW Deposit - $${amount}`,
+      description: `Extrede Deposit - $${amount}`,
       sandbox: process.env.OXAPAY_SANDBOX === 'true'
     }
 
@@ -128,8 +128,8 @@ router.post('/create-payment', async (req, res) => {
             transactionId: transaction._id.toString(),
             paymentMethod: 'Crypto (OxaPay)',
             date: new Date().toLocaleString(),
-            platformName: settings?.platformName || 'SCW',
-            supportEmail: settings?.supportEmail || 'support@SCW.com',
+            platformName: settings?.platformName || 'Extrede',
+            supportEmail: settings?.supportEmail || 'support@Extrede.com',
             year: new Date().getFullYear().toString()
           })
         }
@@ -254,8 +254,8 @@ router.post('/webhook', async (req, res) => {
               paymentMethod: 'Crypto (OxaPay)',
               date: new Date().toLocaleString(),
               newBalance: wallet.balance.toFixed(2),
-              platformName: settings?.platformName || 'SCW',
-              supportEmail: settings?.supportEmail || 'support@SCW.com',
+              platformName: settings?.platformName || 'Extrede',
+              supportEmail: settings?.supportEmail || 'support@Extrede.com',
               year: new Date().getFullYear().toString()
             })
           }
@@ -332,7 +332,7 @@ router.post('/create-payout', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Transaction not found' })
     }
 
-    const backendUrl = process.env.BACKEND_URL || 'https://scw.com/api'
+    const backendUrl = process.env.BACKEND_URL || 'https://extrede.com/api'
 
     const payoutData = {
       address: address || transaction.cryptoAddress,
@@ -340,7 +340,7 @@ router.post('/create-payout', async (req, res) => {
       currency: currency || transaction.cryptoCurrency || 'USDT',
       network: network || transaction.cryptoNetwork,
       callback_url: `${backendUrl}/api/oxapay/webhook`,
-      description: `SCW Withdrawal - ${transaction._id}`
+      description: `Extrede Withdrawal - ${transaction._id}`
     }
 
     const oxaRes = await fetch(`${OXAPAY_API_URL}/payout`, {

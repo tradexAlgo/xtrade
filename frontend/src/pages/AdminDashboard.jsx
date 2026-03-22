@@ -255,7 +255,7 @@ console.log('Menu items:', menuItems)
         {/* Logo */}
         <div className="p-4 flex items-center justify-center gap-2">
           <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center">
-            <span className="text-white font-bold text-sm">A</span>
+            <span className="text-black font-bold text-sm">A</span>
           </div>
           {sidebarExpanded && <span className="text-white font-semibold">Admin</span>}
         </div>
@@ -604,7 +604,7 @@ console.log('Menu items:', menuItems)
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-400">Subject:</span>
-                    <span className="text-white">Welcome to SCW</span>
+                    <span className="text-white">Welcome to Extrede</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-400">Category:</span>

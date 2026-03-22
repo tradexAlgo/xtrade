@@ -114,7 +114,7 @@ export default function Accounts() {
               whileHover={{ y: -10 }}
               className={`relative rounded-2xl p-8 transition-all duration-300 ${
                 account.popular
-                  ? 'bg-gradient-to-br from-burgundy to-crimson text-white shadow-2xl scale-105'
+                  ? 'bg-gradient-to-br from-burgundy to-crimson text-black shadow-2xl scale-105'
                   : 'bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700'
               }`}
             >
@@ -183,7 +183,7 @@ export default function Accounts() {
                 className={`w-full py-3 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                   account.popular
                     ? 'bg-white text-burgundy hover:bg-gray-100'
-                    : 'bg-gradient-to-r from-burgundy to-crimson text-white hover:from-[#4a0a1d] hover:to-[#a31428]'
+                    : 'bg-gradient-to-r from-burgundy to-crimson text-black hover:from-[#4a0a1d] hover:to-[#a31428]'
                 }`}
               >
                 Open Account

@@ -72,7 +72,7 @@ export default function Security() {
               transition={{ delay: 0.4 }}
               className="text-lg text-white/80 mb-8 leading-relaxed"
             >
-              Your funds and data are protected with industry-leading security protocols. SCW Derivatives uses encrypted transactions, segregated accounts, and advanced monitoring systems to ensure complete protection at every step.
+              Your funds and data are protected with industry-leading security protocols. Extredes uses encrypted transactions, segregated accounts, and advanced monitoring systems to ensure complete protection at every step.
             </motion.p>
 
             {/* Trust Points */}

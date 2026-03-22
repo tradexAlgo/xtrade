@@ -62,8 +62,8 @@ function Navbar() {
             whileTap={{ scale: 0.95 }}
           >
             <img 
-              src={isDarkMode ? "/scw-logo.png" : "/scw-logo.png"} 
-              alt="SCW Derivatives" 
+              src={isDarkMode ? "/extrede-logo.png" : "/extrede-logo.png"} 
+              alt="Extredes" 
               className="h-12 w-auto object-contain"
             />
           </motion.a>
@@ -246,7 +246,7 @@ function Hero() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
-        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" poster="/DiosDerivativelogowhite.png">
+        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" poster="/extredelogowhite.png">
           <source src="/diosvideo5.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[linear-gradient(rgba(108,14,42,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(108,14,42,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
@@ -298,12 +298,12 @@ function Features() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div ref={ref} initial={{ opacity: 0, x: -50 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8 }}>
-            <span className="inline-block px-4 py-2 bg-burgundy/10 text-burgundy dark:text-crimson-light rounded-full text-sm font-semibold mb-4">Why Choose SCW Derivatives</span>
+            <span className="inline-block px-4 py-2 bg-burgundy/10 text-burgundy dark:text-crimson-light rounded-full text-sm font-semibold mb-4">Why Choose Extredes</span>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
               A Platform Built for <span className="gradient-text block">Modern Traders</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-              SCW Derivatives combines advanced technology, deep liquidity, and professional tools.
+              Extredes combines advanced technology, deep liquidity, and professional tools.
             </p>
             <div className="grid grid-cols-3 gap-6">
               {[{ value: '0.0s', label: 'Execution' }, { value: '500+', label: 'Instruments' }, { value: '99.9%', label: 'Uptime' }].map((stat, i) => (
@@ -473,7 +473,7 @@ function Accounts() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 + index * 0.15 }}
               whileHover={{ y: -10 }}
-              className={`relative rounded-2xl p-8 ${account.popular ? 'bg-gradient-to-br from-burgundy to-crimson text-white shadow-2xl scale-105' : 'bg-white dark:bg-gray-800 shadow-lg border border-gray-100 dark:border-gray-700'}`}
+              className={`relative rounded-2xl p-8 ${account.popular ? 'bg-gradient-to-br from-burgundy to-crimson text-black shadow-2xl scale-105' : 'bg-white dark:bg-gray-800 shadow-lg border border-gray-100 dark:border-gray-700'}`}
             >
               {account.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-burgundy px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-1 shadow-lg">
@@ -498,7 +498,7 @@ function Accounts() {
                   </li>
                 ))}
               </ul>
-              <motion.button whileHover={{ scale: 1.05 }} className={`w-full py-3 rounded-full font-semibold ${account.popular ? 'bg-white text-burgundy' : 'bg-gradient-to-r from-burgundy to-crimson text-white'}`}>
+              <motion.button whileHover={{ scale: 1.05 }} className={`w-full py-3 rounded-full font-semibold ${account.popular ? 'bg-white text-burgundy' : 'bg-gradient-to-r from-burgundy to-crimson text-black'}`}>
                 Open Account
               </motion.button>
             </motion.div>
@@ -633,7 +633,7 @@ function GetStarted() {
           {steps.map((step, index) => (
             <motion.div key={step.number} initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: 0.2 + index * 0.15 }} className="relative">
               <motion.div whileHover={{ y: -10 }} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700 h-full">
-                <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-burgundy to-crimson rounded-full flex items-center justify-center text-white font-bold text-sm">{step.number}</div>
+                <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-burgundy to-crimson rounded-full flex items-center justify-center text-black font-bold text-sm">{step.number}</div>
                 <motion.div className="w-14 h-14 rounded-xl bg-gradient-to-br from-burgundy/10 to-crimson/10 flex items-center justify-center mb-4 mt-2" whileHover={{ scale: 1.1 }}>
                   <step.icon className="w-7 h-7 text-burgundy dark:text-crimson-light" />
                 </motion.div>
@@ -678,12 +678,12 @@ function Company() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div ref={ref} initial={{ opacity: 0, x: -50 }} animate={isInView ? { opacity: 1, x: 0 } : {}}>
-            <span className="inline-block px-4 py-2 bg-burgundy/10 text-burgundy dark:text-crimson-light rounded-full text-sm font-semibold mb-4">About SCW Derivatives</span>
+            <span className="inline-block px-4 py-2 bg-burgundy/10 text-burgundy dark:text-crimson-light rounded-full text-sm font-semibold mb-4">About Extredes</span>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
               Next-Generation <span className="gradient-text block">Trading Platform</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-              SCW Derivatives is a next-generation trading platform focused on providing traders with cutting-edge technology.
+              Extredes is a next-generation trading platform focused on providing traders with cutting-edge technology.
             </p>
             <div className="grid grid-cols-2 gap-4">
               {values.map((value, index) => (
@@ -787,7 +787,7 @@ function Footer() {
         <div className="py-16 grid md:grid-cols-2 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2">
             <motion.a href="#home" className="flex items-center mb-6" whileHover={{ scale: 1.05 }}>
-              <img src="/scw-logo.png" alt="SCW Derivatives" className="h-12 w-auto object-contain" />
+              <img src="/extrede-logo.png" alt="Extredes" className="h-12 w-auto object-contain" />
             </motion.a>
             <p className="text-gray-400 mb-6 max-w-sm">
               Empowering traders worldwide with cutting-edge technology, transparent pricing, and reliable execution.
@@ -820,7 +820,7 @@ function Footer() {
 
         <div className="border-t border-white/10 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">© 2026 SCW Derivatives. All Rights Reserved.</p>
+            <p className="text-gray-400 text-sm">© 2026 Extredes. All Rights Reserved.</p>
             <p className="text-gray-500 text-xs text-center md:text-right max-w-md">
               Trading leveraged products involves risk and may not be suitable for all investors.
             </p>

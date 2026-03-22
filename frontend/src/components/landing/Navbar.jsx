@@ -38,7 +38,7 @@ export default function Navbar() {
           >
             <img 
               src="/Dioslogo.png" 
-              alt="SCW Derivatives" 
+              alt="Extredes" 
               className="w-[120px] h-[120px] object-contain"
             />
           </motion.a>

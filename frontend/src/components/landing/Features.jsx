@@ -66,7 +66,7 @@ export default function Features() {
               transition={{ delay: 0.2 }}
               className="inline-block px-4 py-2 bg-burgundy/10 text-burgundy dark:text-crimson-light rounded-full text-sm font-semibold mb-4"
             >
-              Why Choose SCW Derivatives
+              Why Choose Extredes
             </motion.span>
             
             <motion.h2
@@ -85,7 +85,7 @@ export default function Features() {
               transition={{ delay: 0.4 }}
               className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed"
             >
-              SCW Derivatives combines advanced technology, deep liquidity, and professional tools to deliver a trading experience trusted by beginners and professionals alike.
+              Extredes combines advanced technology, deep liquidity, and professional tools to deliver a trading experience trusted by beginners and professionals alike.
             </motion.p>
 
             {/* Animated Stats */}

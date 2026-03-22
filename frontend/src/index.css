@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  /* Theme CSS Variables - Gold Theme (SCW Derivatives) */
-  --theme-primary: #D4A84B;
-  --theme-primaryHover: #C49A3D;
-  --theme-secondary: #E8C872;
-  --theme-secondaryHover: #D4B55E;
-  --theme-accent: #D4A84B;
-  --theme-accentHover: #C49A3D;
+  /* Theme CSS Variables - Yellow Theme (Extredes) */
+  --theme-primary: #F0B90B;
+  --theme-primaryHover: #EAB308;
+  --theme-secondary: #FCE205;
+  --theme-secondaryHover: #FDE047;
+  --theme-accent: #F0B90B;
+  --theme-accentHover: #EAB308;
   --theme-bgPrimary: #000000;
   --theme-bgSecondary: #0D0D0D;
   --theme-bgCard: #1A1A1A;
@@ -22,15 +22,15 @@
   --theme-success: #10B981;
   --theme-error: #EF4444;
   --theme-warning: #F59E0B;
-  --theme-info: #D4A84B;
-  --theme-buyColor: #D4A84B;
+  --theme-info: #F0B90B;
+  --theme-buyColor: #F0B90B;
   --theme-sellColor: #EF4444;
   --theme-profitColor: #10B981;
   --theme-lossColor: #EF4444;
   --theme-sidebarBg: #0D0D0D;
   --theme-sidebarText: #9CA3AF;
-  --theme-sidebarActive: #D4A84B;
-  --theme-buttonPrimary: #D4A84B;
+  --theme-sidebarActive: #F0B90B;
+  --theme-buttonPrimary: #F0B90B;
   --theme-buttonSecondary: #374151;
   --theme-buttonDanger: #EF4444;
 }
@@ -138,7 +138,7 @@ body {
   }
 
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-burgundy to-crimson text-white font-semibold rounded-full 
+    @apply px-6 py-3 bg-gradient-to-r from-burgundy to-crimson text-black font-semibold rounded-full 
            shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300;
   }
 }
@@ -204,7 +204,7 @@ body {
 
   /* Primary Button */
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-burgundy to-crimson text-white font-semibold rounded-full 
+    @apply px-6 py-3 bg-gradient-to-r from-burgundy to-crimson text-black font-semibold rounded-full 
            shadow-lg shadow-burgundy/25 hover:shadow-xl hover:shadow-burgundy/30 
            transform hover:-translate-y-0.5 transition-all duration-300;
   }
@@ -253,12 +253,12 @@ body {
 }
 
 .landing-page ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #6c0e2a, #d41a33);
+  background: linear-gradient(to bottom, #FCE205, #F0B90B);
   border-radius: 4px;
 }
 
 .landing-page ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #4a0a1d, #a31428);
+  background: linear-gradient(to bottom, #F0B90B, #EAB308);
 }
 
 /* Landing Page Custom Scrollbar - Dark */
@@ -268,11 +268,11 @@ body {
 
 /* Selection Color for Landing Page */
 .landing-page ::selection {
-  background: rgba(108, 14, 42, 0.2);
-  color: #6c0e2a;
+  background: rgba(240, 185, 11, 0.2);
+  color: #F0B90B;
 }
 
 .dark .landing-page ::selection {
-  background: rgba(212, 26, 51, 0.3);
-  color: #e85d75;
+  background: rgba(240, 185, 11, 0.3);
+  color: #FCE205;
 }

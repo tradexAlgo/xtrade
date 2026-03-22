@@ -125,8 +125,8 @@ router.post('/deposit', async (req, res) => {
           transactionId: transaction._id.toString(),
           paymentMethod: paymentMethod || 'Bank Transfer',
           date: new Date().toLocaleString(),
-          platformName: settings?.platformName || 'SCW',
-          supportEmail: settings?.supportEmail || 'support@SCW.com',
+          platformName: settings?.platformName || 'Extrede',
+          supportEmail: settings?.supportEmail || 'support@Extrede.com',
           year: new Date().getFullYear().toString()
         })
       }
@@ -205,8 +205,8 @@ router.post('/withdraw', async (req, res) => {
           transactionId: transaction._id.toString(),
           paymentMethod: paymentMethod || 'Bank Transfer',
           date: new Date().toLocaleString(),
-          platformName: settings?.platformName || 'SCW',
-          supportEmail: settings?.supportEmail || 'support@SCW.com',
+          platformName: settings?.platformName || 'Extrede',
+          supportEmail: settings?.supportEmail || 'support@Extrede.com',
           year: new Date().getFullYear().toString()
         })
       }
@@ -395,14 +395,14 @@ router.put('/admin/approve/:id', async (req, res) => {
       try {
         const payoutApiKey = process.env.OXAPAY_PAYOUT_API_KEY
         if (payoutApiKey) {
-          const backendUrl = process.env.BACKEND_URL || 'https://scw.com/api'
+          const backendUrl = process.env.BACKEND_URL || 'https://extrede.com/api'
           const payoutData = {
             address: transaction.cryptoAddress,
             amount: transaction.amount,
             currency: transaction.cryptoCurrency || 'USDT',
             network: transaction.cryptoNetwork,
             callback_url: `${backendUrl}/api/oxapay/webhook`,
-            description: `SCW Withdrawal - ${transaction._id}`
+            description: `Extrede Withdrawal - ${transaction._id}`
           }
 
           const oxaRes = await fetch('https://api.oxapay.com/v1/payout', {
@@ -478,8 +478,8 @@ router.put('/admin/approve/:id', async (req, res) => {
           paymentMethod: transaction.paymentMethod || 'Wallet',
           date: new Date().toLocaleString(),
           newBalance: wallet.balance.toFixed(2),
-          platformName: settings?.platformName || 'SCW',
-          supportEmail: settings?.supportEmail || 'support@SCW.com',
+          platformName: settings?.platformName || 'Extrede',
+          supportEmail: settings?.supportEmail || 'support@Extrede.com',
           year: new Date().getFullYear().toString()
         })
       }
@@ -539,8 +539,8 @@ router.put('/admin/reject/:id', async (req, res) => {
   <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
     <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border-radius: 16px; padding: 40px; border: 1px solid #dc2626;">
       <div style="text-align: center; margin-bottom: 30px;">
-        <img src="${process.env.LOGO_URL || 'https://diosderivative.com/DiosDerivativewhite.png'}" alt="SCW Derivative" style="height: 50px; width: auto; margin-bottom: 15px;" />
-        <h1 style="color: #fff; margin: 0; font-size: 24px;">SCW Derivative</h1>
+        <img src="${process.env.LOGO_URL || 'https://extrede.com/extrede-logo.png'}" alt="Extrede" style="height: 50px; width: auto; margin-bottom: 15px;" />
+        <h1 style="color: #fff; margin: 0; font-size: 24px;">Extrede</h1>
       </div>
       <div style="text-align: center; margin-bottom: 20px;">
         <span style="display: inline-block; background: #dc2626; color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: bold;">✗ Deposit Rejected</span>
@@ -557,10 +557,10 @@ router.put('/admin/reject/:id', async (req, res) => {
       </div>
       <p style="color: #888; font-size: 14px; margin: 0 0 30px;">If you have any questions, please contact our support team.</p>
       <div style="text-align: center; margin-bottom: 30px;">
-        <a href="${process.env.FRONTEND_URL || 'https://diosderivative.com'}/user/login" style="display: inline-block; background: #dc2626; color: #fff; padding: 14px 40px; border-radius: 8px; text-decoration: none; font-weight: bold;">Contact Support</a>
+        <a href="${process.env.FRONTEND_URL || 'https://extrede.com'}/user/login" style="display: inline-block; background: #dc2626; color: #fff; padding: 14px 40px; border-radius: 8px; text-decoration: none; font-weight: bold;">Contact Support</a>
       </div>
       <hr style="border: none; border-top: 1px solid #333; margin: 30px 0;">
-      <p style="color: #666; font-size: 12px; margin: 0; text-align: center;">© ${new Date().getFullYear()} SCW Derivative. All rights reserved.</p>
+      <p style="color: #666; font-size: 12px; margin: 0; text-align: center;">© ${new Date().getFullYear()} Extrede. All rights reserved.</p>
     </div>
   </div>
 </body>
@@ -738,13 +738,13 @@ router.put('/transaction/:id/approve', async (req, res) => {
                 const EmailSettings = (await import('../models/EmailSettings.js')).default
                 const { sendTemplateEmail } = await import('../services/emailService.js')
                 const settings = await EmailSettings.findOne()
-                const adminEmail = settings?.supportEmail || 'admin@SCW.com'
+                const adminEmail = settings?.supportEmail || 'admin@Extrede.com'
                 
                 await sendTemplateEmail('admin_notification', adminEmail, {
                   subject: 'URGENT: OxaPay Balance Insufficient',
                   firstName: 'Admin',
                   message: `Withdrawal of $${transaction.amount.toFixed(2)} could not be processed due to insufficient OxaPay balance.\n\nAvailable: $${availableBalance.toFixed(2)}\nRequested: $${transaction.amount.toFixed(2)}\nShortage: $${shortage.toFixed(2)}\n\nPlease top up your OxaPay account immediately.`,
-                  platformName: settings?.platformName || 'SCW',
+                  platformName: settings?.platformName || 'Extrede',
                   year: new Date().getFullYear().toString()
                 })
               } catch (emailError) {
@@ -763,14 +763,14 @@ router.put('/transaction/:id/approve', async (req, res) => {
             }
             
             // Proceed with payout if balance is sufficient
-            const backendUrl = process.env.BACKEND_URL || 'https://scw.com/api'
+            const backendUrl = process.env.BACKEND_URL || 'https://extrede.com/api'
             const payoutData = {
               address: transaction.cryptoAddress,
               amount: transaction.amount,
               currency: transaction.cryptoCurrency || 'USDT',
               network: transaction.cryptoNetwork,
               callback_url: `${backendUrl}/api/oxapay/webhook`,
-              description: `SCW Withdrawal - ${transaction._id}`
+              description: `Extrede Withdrawal - ${transaction._id}`
             }
 
           const oxaRes = await fetch('https://api.oxapay.com/v1/payout', {
@@ -846,8 +846,8 @@ router.put('/transaction/:id/approve', async (req, res) => {
           paymentMethod: transaction.paymentMethod || 'Wallet',
           date: new Date().toLocaleString(),
           newBalance: wallet.balance.toFixed(2),
-          platformName: settings?.platformName || 'SCW',
-          supportEmail: settings?.supportEmail || 'support@SCW.com',
+          platformName: settings?.platformName || 'Extrede',
+          supportEmail: settings?.supportEmail || 'support@Extrede.com',
           year: new Date().getFullYear().toString()
         })
       }

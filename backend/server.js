@@ -228,7 +228,7 @@ app.get('/api/app-version', (req, res) => {
     success: true,
     minVersion: process.env.MIN_APP_VERSION || '1.0.0',
     latestVersion: process.env.LATEST_APP_VERSION || '1.0.0',
-    updateUrl: process.env.APP_UPDATE_URL || 'https://scw.com/download',
+    updateUrl: process.env.APP_UPDATE_URL || 'https://extrede.com/download',
     forceUpdate: process.env.FORCE_APP_UPDATE === 'true'
   })
 })
@@ -237,9 +237,9 @@ app.get('/api/app-version', (req, res) => {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 // Serve APK download
-app.get('/downloads/scw.apk', (req, res) => {
-  const apkPath = path.join(__dirname, 'apk', 'SCW.apk')
-  res.download(apkPath, 'SCW.apk', (err) => {
+app.get('/downloads/extrede.apk', (req, res) => {
+  const apkPath = path.join(__dirname, 'apk', 'Extrede.apk')
+  res.download(apkPath, 'Extrede.apk', (err) => {
     if (err) {
       console.error('APK download error:', err)
       res.status(404).json({ error: 'APK not found' })
@@ -249,7 +249,7 @@ app.get('/downloads/scw.apk', (req, res) => {
 
 // Health check
 app.get('/', (req, res) => {
-  res.json({ message: 'SCW API is running' })
+  res.json({ message: 'Extrede API is running' })
 })
 
 const PORT = process.env.PORT || 5000
@@ -287,4 +287,4 @@ httpServer.listen(PORT, () => {
     timezone: 'UTC'
   })
   console.log('[CRON] Daily swap application scheduled for 22:00 UTC')
-})
+}) 

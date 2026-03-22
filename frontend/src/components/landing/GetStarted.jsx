@@ -92,7 +92,7 @@ export default function GetStarted() {
                 className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full"
               >
                 {/* Number Badge */}
-                <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-burgundy to-crimson rounded-full flex items-center justify-center text-white font-bold text-sm">
+                <div className="absolute -top-3 -left-3 w-10 h-10 bg-gradient-to-br from-burgundy to-crimson rounded-full flex items-center justify-center text-black font-bold text-sm">
                   {step.number}
                 </div>
 

@@ -37,7 +37,7 @@ export default function Company() {
               transition={{ delay: 0.2 }}
               className="inline-block px-4 py-2 bg-burgundy/10 text-burgundy dark:text-crimson-light rounded-full text-sm font-semibold mb-4"
             >
-              About SCW Derivatives
+              About Extredes
             </motion.span>
             
             <motion.h2
@@ -56,7 +56,7 @@ export default function Company() {
               transition={{ delay: 0.4 }}
               className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed"
             >
-              SCW Derivatives is a next-generation trading platform focused on providing traders with cutting-edge technology, transparent pricing, and reliable execution. Our mission is to empower traders worldwide with tools that simplify trading and maximize potential.
+              Extredes is a next-generation trading platform focused on providing traders with cutting-edge technology, transparent pricing, and reliable execution. Our mission is to empower traders worldwide with tools that simplify trading and maximize potential.
             </motion.p>
 
             {/* Values Grid */}

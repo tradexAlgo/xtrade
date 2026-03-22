@@ -70,8 +70,8 @@ const Login = () => {
         {/* Logo */}
         <div className="flex justify-center mb-6">
           <img
-            src="/scw-logo.png"
-            alt="SCW Logo"
+            src="/extrede-logo.png"
+            alt="Extrede Logo"
             className="h-16 w-auto object-contain"
           />
         </div>
@@ -87,7 +87,7 @@ const Login = () => {
           <button
             onClick={() => setActiveTab('signin')}
             className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
-              activeTab === 'signin' ? 'bg-gradient-to-r from-burgundy to-crimson text-white' : 'text-gray-400 hover:text-white'
+              activeTab === 'signin' ? 'bg-gradient-to-r from-burgundy to-crimson text-black' : 'text-gray-400 hover:text-white'
             }`}
           >
             Sign in
@@ -148,7 +148,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-burgundy to-crimson text-white font-medium py-3 rounded-full hover:from-burgundy-dark hover:to-crimson-dark transition-all mt-2 disabled:opacity-50 shadow-lg shadow-burgundy/25"
+            className="w-full bg-gradient-to-r from-burgundy to-crimson text-black font-medium py-3 rounded-full hover:from-burgundy-dark hover:to-crimson-dark transition-all mt-2 disabled:opacity-50 shadow-lg shadow-burgundy/25"
           >
             {loading ? 'Signing in...' : 'Sign in'}
           </button>

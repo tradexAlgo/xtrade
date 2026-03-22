@@ -45,7 +45,7 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full object-cover"
           poster="/Dioslogo.png"
         >
-          <source src="/DiosDerivativesvideo.mp4" type="video/mp4" />
+          <source src="/extredesvideo.mp4" type="video/mp4" />
         </video>
         
         {/* Grid Pattern */}

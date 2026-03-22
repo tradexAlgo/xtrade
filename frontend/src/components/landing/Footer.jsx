@@ -17,7 +17,7 @@ const footerLinks = {
   contact: {
     title: 'Contact',
     items: [
-      { icon: Mail, text: 'support@diosderivatives.com' },
+      { icon: Mail, text: 'support@extredes.com' },
       { icon: Phone, text: '+1 (555) 123-4567' },
       { icon: MapPin, text: '123 Trading Street, Financial District' },
     ],
@@ -66,7 +66,7 @@ export default function Footer() {
             >
               <img 
                 src="/Dioslogo.png" 
-                alt="SCW Derivatives" 
+                alt="Extredes" 
                 className="w-[120px] h-[120px] object-contain"
               />
             </motion.a>
@@ -136,7 +136,7 @@ export default function Footer() {
         <div className="border-t border-white/10 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm text-center md:text-left">
-              © 2026 SCW Derivatives. All Rights Reserved.
+              © 2026 Extredes. All Rights Reserved.
             </p>
             <p className="text-gray-500 text-xs text-center md:text-right max-w-md">
               Trading leveraged products involves risk and may not be suitable for all investors. Please ensure you understand the risks involved.
