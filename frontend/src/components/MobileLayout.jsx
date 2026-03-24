@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useTheme } from '../context/ThemeContext'
 import { 
   Home, 
   BarChart2, 
@@ -14,12 +15,15 @@ import {
   LogOut,
   Wallet,
   X,
-  ChevronRight
+  ChevronRight,
+  Sun,
+  Moon
 } from 'lucide-react'
 
 const MobileLayout = ({ children, activeTab = 'home' }) => {
   const navigate = useNavigate()
   const location = useLocation()
+  const { isDarkMode, toggleDarkMode } = useTheme()
   const [showMoreMenu, setShowMoreMenu] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
 
@@ -160,6 +164,19 @@ const MobileLayout = ({ children, activeTab = 'home' }) => {
                     <ChevronRight size={20} className="text-gray-500" />
                   </button>
                 ))}
+                
+                {/* Theme Toggle */}
+                <button
+                  onClick={toggleDarkMode}
+                  className="w-full flex items-center justify-between p-4 rounded-xl hover:bg-dark-700 transition-colors mt-2"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`w-10 h-10 ${isDarkMode ? 'bg-yellow-500/20' : 'bg-blue-500/20'} rounded-full flex items-center justify-center`}>
+                      {isDarkMode ? <Sun size={20} className="text-yellow-500" /> : <Moon size={20} className="text-blue-500" />}
+                    </div>
+                    <span className="text-white font-medium">{isDarkMode ? 'Light Mode' : 'Dark Mode'}</span>
+                  </div>
+                </button>
                 
                 {/* Logout */}
                 <button

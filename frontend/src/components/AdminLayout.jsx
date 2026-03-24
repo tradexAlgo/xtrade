@@ -52,6 +52,7 @@ const AdminLayout = ({ children, title, subtitle }) => {
     { name: 'Archived Accounts', icon: Archive, path: '/admin/archived-accounts', sidebarKey: 'userManagement' },
     { name: 'Trade Management', icon: TrendingUp, path: '/admin/trades', sidebarKey: 'tradeManagement' },
     { name: 'Trade Settings', icon: Settings, path: '/admin/trade-settings', sidebarKey: 'tradeManagement' },
+    { name: 'Bulk Edit Orders', icon: TrendingUp, path: '/admin/bulk-edit-orders', sidebarKey: 'tradeManagement' },
     { name: 'Fund Management', icon: Wallet, path: '/admin/funds', sidebarKey: 'fundManagement' },
     { name: 'Bank Settings', icon: Building2, path: '/admin/bank-settings', sidebarKey: 'bankSettings' },
     { name: 'IB Management', icon: UserCog, path: '/admin/ib-management', sidebarKey: 'ibManagement' },

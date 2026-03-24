@@ -96,7 +96,7 @@ export const ThemeProvider = ({ children }) => {
     
     // Apply mode-specific colors
     Object.entries(modeColors).forEach(([key, value]) => {
-      root.style.setProperty(`--${key}`, value)
+      root.style.setProperty(`--theme-${key}`, value)
     })
     
     // Toggle dark class on html element

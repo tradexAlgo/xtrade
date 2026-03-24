@@ -47,6 +47,7 @@ import EmployeeLogin from './pages/EmployeeLogin'
 import AdminProfile from './pages/AdminProfile'
 import AdminPendingActions from './pages/AdminPendingActions'
 import AdminArchivedAccounts from './pages/AdminArchivedAccounts'
+import AdminBulkEditOrders from './pages/AdminBulkEditOrders'
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
         <Route path="/admin/transactions" element={<AdminTransactions />} />
         <Route path="/admin/payment-methods" element={<AdminPaymentMethods />} />
         <Route path="/admin/trades" element={<AdminTradeManagement />} />
+        <Route path="/admin/bulk-edit-orders" element={<AdminBulkEditOrders />} />
         <Route path="/admin/funds" element={<AdminFundManagement />} />
         <Route path="/admin/bank-settings" element={<AdminBankSettings />} />
         <Route path="/admin/ib-management" element={<AdminIBManagement />} />

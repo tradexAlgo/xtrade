@@ -10,9 +10,11 @@ import {
 import priceService from '../services/priceService'
 import priceStreamService from '../services/priceStream'
 import { API_URL } from '../config/api'
+import { useTheme } from '../context/ThemeContext'
 
 const MobileTradingApp = () => {
   const navigate = useNavigate()
+  const { isDarkMode, toggleDarkMode } = useTheme()
   const [searchParams] = useSearchParams()
   const accountIdFromUrl = searchParams.get('account')
   const [activeTab, setActiveTab] = useState(accountIdFromUrl ? 'trade' : 'home')
@@ -569,7 +571,7 @@ const MobileTradingApp = () => {
   const [showAccountSelector, setShowAccountSelector] = useState(false)
   
   const renderHome = () => (
-    <div className="p-4 pb-20">
+    <div className="p-4 pb-20 mobile-theme-wrapper">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
@@ -765,7 +767,7 @@ const MobileTradingApp = () => {
 
   // MARKET TAB
   const renderMarket = () => (
-    <div className="flex flex-col h-full pb-16">
+    <div className="flex flex-col h-full pb-16 mobile-theme-wrapper">
       {/* Search */}
       <div className="p-4 bg-dark-800 border-b border-gray-800">
         <div className="relative mb-3">
@@ -1376,7 +1378,7 @@ const MobileTradingApp = () => {
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 flex flex-col">
+    <div className="min-h-screen bg-dark-900 flex flex-col mobile-theme-wrapper">
       {/* Main Content */}
       <main className="flex-1 overflow-hidden">
         {activeTab === 'home' && renderHome()}
