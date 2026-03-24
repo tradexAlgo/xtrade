@@ -33,15 +33,19 @@ const AdminBulkEditOrders = () => {
   const tradesPerPage = 50 // Show more per page for bulk editing
 
   useEffect(() => {
-    fetchTrades()
-  }, [filterStatus, currentPage])
+    const timer = setTimeout(() => {
+      fetchTrades()
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [filterStatus, currentPage, searchTerm])
 
   const fetchTrades = async () => {
     setLoading(true)
     try {
       const offset = (currentPage - 1) * tradesPerPage
       const statusParam = filterStatus !== 'all' ? `&status=${filterStatus.toUpperCase()}` : ''
-      const res = await fetch(`${API_URL}/admin/trade/all?limit=${tradesPerPage}&offset=${offset}${statusParam}`)
+      const searchParam = searchTerm ? `&search=${encodeURIComponent(searchTerm)}` : ''
+      const res = await fetch(`${API_URL}/admin/trade/all?limit=${tradesPerPage}&offset=${offset}${statusParam}${searchParam}`)
       const data = await res.json()
       if (data.trades) {
         setTrades(data.trades)

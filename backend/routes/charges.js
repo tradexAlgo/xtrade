@@ -9,6 +9,7 @@ const router = express.Router()
 router.get('/spreads', async (req, res) => {
   try {
     const { userId, accountTypeId } = req.query
+    console.log(`[Spreads Request] userId=${userId}, accountTypeId=${accountTypeId}`);
     
     // Get all active instruments from database
     const allInstruments = await Instrument.find({ isActive: true }).select('symbol')
@@ -40,8 +41,13 @@ router.get('/spreads', async (req, res) => {
       .sort({ level: 1 })
     
     // Filter charges with spreadValue > 0
-    const chargesWithSpread = charges.filter(c => c.spreadValue > 0)
-    console.log('All charges count:', charges.length, 'With spread:', chargesWithSpread.length)
+    const chargesWithSpread = charges.filter(c => {
+      if (c.spreadValue <= 0) return false;
+      if (c.level === 'USER' && (!userId || c.userId?.toString() !== userId)) return false;
+      if (c.level === 'ACCOUNT_TYPE' && (!accountTypeId || c.accountTypeId?.toString() !== accountTypeId)) return false;
+      return true;
+    });
+    console.log('All charges count:', charges.length, 'With spread (filtered):', chargesWithSpread.length)
     
     // Debug: Log all charges with spread
     chargesWithSpread.forEach(c => {
@@ -52,52 +58,37 @@ router.get('/spreads', async (req, res) => {
     const spreadMap = {}
     
     // Priority order: USER > INSTRUMENT > ACCOUNT_TYPE > SEGMENT > GLOBAL
-    const priorityOrder = { 'USER': 1, 'INSTRUMENT': 2, 'ACCOUNT_TYPE': 3, 'SEGMENT': 4, 'GLOBAL': 5 }
+    const priorityOrder = { 'USER': 1, 'INSTRUMENT': 2, 'ACCOUNT_TYPE': 3, 'SEGMENT': 4, 'GLOBAL': 5 };
     
-    for (const charge of chargesWithSpread) {
-      // For instrument-specific charges
-      if (charge.instrumentSymbol) {
-        const existing = spreadMap[charge.instrumentSymbol]
-        if (!existing || priorityOrder[charge.level] < priorityOrder[existing.level]) {
-          spreadMap[charge.instrumentSymbol] = {
-            spread: charge.spreadValue,
-            spreadType: charge.spreadType,
-            level: charge.level
-          }
-        }
+    const applySpread = (symbol, charge) => {
+      const existing = spreadMap[symbol];
+      if (!existing || priorityOrder[charge.level] < priorityOrder[existing.level]) {
+        spreadMap[symbol] = {
+          spread: charge.spreadValue,
+          spreadType: charge.spreadType,
+          level: charge.level
+        };
       }
-      // For segment-level charges, apply to all instruments in that segment
-      else if (charge.segment) {
+    };
+
+    for (const charge of chargesWithSpread) {
+      if (charge.instrumentSymbol) {
+        applySpread(charge.instrumentSymbol, charge);
+      } else if (charge.segment) {
         const segmentSymbols = {
           'Forex': ['EURUSD', 'GBPUSD', 'USDJPY', 'USDCHF', 'AUDUSD', 'NZDUSD', 'USDCAD', 'EURGBP', 'EURJPY', 'GBPJPY'],
           'Metals': ['XAUUSD', 'XAGUSD'],
           'Crypto': ['BTCUSDT', 'ETHUSDT', 'LTCUSDT', 'XRPUSDT', 'BNBUSDT', 'SOLUSDT', 'ADAUSDT', 'DOGEUSDT', 'DOTUSDT', 'MATICUSDT', 'AVAXUSDT', 'LINKUSDT'],
           'Indices': ['US30', 'US500', 'NAS100']
-        }
-        const symbols = segmentSymbols[charge.segment] || []
+        };
+        const symbols = segmentSymbols[charge.segment] || [];
         for (const symbol of symbols) {
-          const existing = spreadMap[symbol]
-          if (!existing || priorityOrder[charge.level] < priorityOrder[existing.level]) {
-            spreadMap[symbol] = {
-              spread: charge.spreadValue,
-              spreadType: charge.spreadType,
-              level: charge.level
-            }
-          }
+          applySpread(symbol, charge);
         }
-      }
-      // For global charges, apply to ALL instruments from database
-      else if (charge.level === 'GLOBAL') {
-        console.log(`[GLOBAL Spread] Applying ${charge.spreadValue} to ${allSymbols.length} instruments`)
-        // Use allSymbols fetched from Instrument model (includes all active instruments)
+      } else {
+        // Evaluate globally over all symbols for GLOBAL, ACCOUNT_TYPE, and USER level charges that don't specify instrument or segment
         for (const symbol of allSymbols) {
-          if (!spreadMap[symbol]) {
-            spreadMap[symbol] = {
-              spread: charge.spreadValue,
-              spreadType: charge.spreadType,
-              level: charge.level
-            }
-          }
+          applySpread(symbol, charge);
         }
       }
     }
@@ -128,6 +119,7 @@ router.get('/', async (req, res) => {
 
     const charges = await Charges.find(query)
       .populate('userId', 'name email mobile')
+      .populate('accountTypeId', 'name')
       .sort({ level: 1, createdAt: -1 })
     res.json({ success: true, charges })
   } catch (error) {

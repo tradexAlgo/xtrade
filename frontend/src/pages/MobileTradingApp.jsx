@@ -5,7 +5,7 @@ import {
   Copy, Users, HelpCircle, FileText, UserCircle, LogOut, Wallet,
   X, ChevronRight, Search, Star, ArrowUp, ArrowDown, Clock,
   Plus, Minus, Settings, RefreshCw, ChevronDown, Bell, User,
-  ArrowDownCircle, ArrowUpCircle, Check, Pencil, Trash2
+  ArrowDownCircle, ArrowUpCircle, Check, Pencil, Trash2, Sun, Moon
 } from 'lucide-react'
 import priceService from '../services/priceService'
 import priceStreamService from '../services/priceStream'
@@ -65,6 +65,38 @@ const MobileTradingApp = () => {
   // Default starred symbols
   const defaultStarred = ['XAUUSD', 'EURUSD', 'GBPUSD', 'BTCUSD']
 
+  // Ref to hold latest adminSpreads
+  const adminSpreadsRef = useRef({})
+
+  // Spread Calculate Helper
+  const calculateSpread = (symbol, bid, apiAsk) => {
+    const adminSpreadData = adminSpreadsRef.current[symbol]
+    const adminSpread = adminSpreadData?.spread || 0
+    let pipMultiplier = 0.0001
+    if (['XAUUSD', 'XAGUSD', 'XPTUSD', 'XPDUSD'].includes(symbol)) pipMultiplier = 0.01;
+    else if (symbol.includes('JPY')) pipMultiplier = 0.01;
+    else if (symbol.includes('USDT') || (symbol.includes('USD') && symbol.length > 6)) pipMultiplier = 0.01;
+    const totalSpreadPips = adminSpread
+    const spreadInPrice = totalSpreadPips * pipMultiplier
+    const ask = bid + spreadInPrice
+    return { totalSpreadPips, ask }
+  }
+
+  // Fetch Admin Spreads
+  const fetchAdminSpreads = async (accountData = selectedAccount, userData = user) => {
+    try {
+      const accTypeId = accountData?.accountTypeId?._id || accountData?.accountTypeId || '';
+      const uid = userData?._id || '';
+      const res = await fetch(`${API_URL}/charges/spreads?userId=${uid}&accountTypeId=${accTypeId}`)
+      const data = await res.json()
+      if (data.success && data.spreads) {
+        adminSpreadsRef.current = data.spreads
+      }
+    } catch (e) {
+      console.error('Mobile spreads error:', e)
+    }
+  }
+
   // Handle resize - redirect to dashboard if desktop
   useEffect(() => {
     const handleResize = () => {
@@ -118,17 +150,19 @@ const MobileTradingApp = () => {
 
   useEffect(() => {
     if (selectedAccount) {
+      fetchAdminSpreads(selectedAccount, user)
       fetchOpenTrades()
       fetchPendingOrders()
       fetchTradeHistory()
       fetchAccountSummary()
       const interval = setInterval(() => {
+        fetchAdminSpreads(selectedAccount, user)
         fetchOpenTrades()
         fetchAccountSummary()
       }, 5000)
       return () => clearInterval(interval)
     }
-  }, [selectedAccount])
+  }, [selectedAccount, user])
 
   // Get all symbols from loaded instruments for price fetching
   const allSymbols = instruments.length > 0 
@@ -156,10 +190,8 @@ const MobileTradingApp = () => {
       setInstruments(prev => prev.map(inst => {
         const priceData = prices[inst.symbol]
         if (priceData && priceData.bid && priceData.bid > 0) {
-          const bid = priceData.bid
-          const ask = priceData.ask || priceData.bid
-          const spread = Math.abs(ask - bid) || (bid * 0.0001)
-          return { ...inst, bid, ask, spread }
+          const { totalSpreadPips, ask } = calculateSpread(inst.symbol, priceData.bid, priceData.ask)
+          return { ...inst, bid: priceData.bid, ask, spread: totalSpreadPips }
         }
         return inst
       }))
@@ -189,10 +221,8 @@ const MobileTradingApp = () => {
         setInstruments(prev => prev.map(inst => {
           const priceData = allPrices[inst.symbol]
           if (priceData && priceData.bid) {
-            const bid = priceData.bid
-            const ask = priceData.ask || priceData.bid
-            const spread = Math.abs(ask - bid) || (bid * 0.0001)
-            return { ...inst, bid, ask, spread }
+            const { totalSpreadPips, ask } = calculateSpread(inst.symbol, priceData.bid, priceData.ask)
+            return { ...inst, bid: priceData.bid, ask, spread: totalSpreadPips }
           }
           return inst
         }))
@@ -537,9 +567,17 @@ const MobileTradingApp = () => {
     { name: 'Profile', icon: UserCircle, path: '/profile' },
     { name: 'Support', icon: HelpCircle, path: '/support' },
     { name: 'Instructions', icon: FileText, path: '/instructions' },
+    { name: isDarkMode ? 'Light Mode' : 'Dark Mode', icon: isDarkMode ? Sun : Moon, action: () => { toggleDarkMode(); setShowMoreMenu(false); } },
   ]
 
-  const getPrice = (symbol) => livePrices[symbol] || { bid: 0, ask: 0 }
+  const getPrice = (symbol) => {
+    const rawPrice = livePrices[symbol] || { bid: 0, ask: 0 }
+    if (rawPrice.bid > 0) {
+      const { totalSpreadPips, ask } = calculateSpread(symbol, rawPrice.bid, rawPrice.ask)
+      return { bid: rawPrice.bid, ask, spread: totalSpreadPips }
+    }
+    return rawPrice
+  }
 
   const calculatePnl = (trade) => {
     const prices = getPrice(trade.symbol)
@@ -1209,10 +1247,10 @@ const MobileTradingApp = () => {
       </div>
 
       {/* Full Screen TradingView Chart */}
-      <div className="flex-1 bg-[#0d0d0d] relative min-h-0" ref={chartContainerRef}>
+      <div className={`flex-1 relative min-h-0 ${isDarkMode ? 'bg-[#0d0d0d]' : 'bg-white'}`} ref={chartContainerRef}>
         <iframe
-          key={activeChartTab}
-          src={`https://s.tradingview.com/widgetembed/?frameElementId=tradingview_mobile&symbol=${getSymbolForTradingView(activeChartTab)}&interval=5&hidesidetoolbar=0&hidetoptoolbar=0&symboledit=1&saveimage=1&toolbarbg=0d0d0d&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&withdateranges=1&showpopupbutton=1&studies_overrides={}&overrides={}&enabled_features=["left_toolbar","header_widget","drawing_templates"]&disabled_features=["hide_left_toolbar_by_default"]&locale=en&utm_source=localhost&utm_medium=widget_new&utm_campaign=chart&hide_side_toolbar=0`}
+          key={activeChartTab + (isDarkMode ? 'd' : 'l')}
+          src={`https://s.tradingview.com/widgetembed/?frameElementId=tradingview_mobile&symbol=${getSymbolForTradingView(activeChartTab)}&interval=5&hidesidetoolbar=0&hidetoptoolbar=0&symboledit=1&saveimage=1&toolbarbg=${isDarkMode ? '0d0d0d' : 'ffffff'}&studies=[]&theme=${isDarkMode ? 'dark' : 'light'}&style=1&timezone=Etc%2FUTC&withdateranges=1&showpopupbutton=1&studies_overrides={}&overrides={}&enabled_features=["left_toolbar","header_widget","drawing_templates"]&disabled_features=["hide_left_toolbar_by_default"]&locale=en&utm_source=localhost&utm_medium=widget_new&utm_campaign=chart&hide_side_toolbar=0`}
           style={{ width: '100%', height: '100%', border: 'none' }}
           allowFullScreen
           title="TradingView Chart"
@@ -1457,7 +1495,7 @@ const MobileTradingApp = () => {
               </div>
 
               {/* One-Click Buy/Sell */}
-              <div className="flex gap-3 mb-4">
+              <div className="flex items-center gap-2 mb-4">
                 <button
                   onClick={() => { setOrderSide('SELL'); executeOrder() }}
                   disabled={isExecuting}
@@ -1468,6 +1506,14 @@ const MobileTradingApp = () => {
                     {getPrice(selectedInstrument.symbol).bid?.toFixed(selectedInstrument.category === 'Forex' ? 5 : 2) || '-'}
                   </p>
                 </button>
+                
+                <div className="flex flex-col items-center justify-center min-w-[40px]">
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${getPrice(selectedInstrument.symbol).spread > 0 ? 'bg-blue-600' : 'bg-green-600'} text-white text-center shadow-lg border border-gray-700/50 z-10 whitespace-nowrap`}>
+                    {(getPrice(selectedInstrument.symbol).spread || 0).toFixed(1)}
+                  </span>
+                  <span className="text-[9px] text-gray-500 mt-1">Spread</span>
+                </div>
+
                 <button
                   onClick={() => { setOrderSide('BUY'); executeOrder() }}
                   disabled={isExecuting}

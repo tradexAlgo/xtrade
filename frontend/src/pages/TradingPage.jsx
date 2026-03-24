@@ -232,6 +232,13 @@ const [tabOrder, setTabOrder] = useState(['Positions', 'Pending', 'History', 'Ca
     }
   }, [accountId])
 
+  // Automatically fetch correct spreads once the account is loaded
+  useEffect(() => {
+    if (account?.accountTypeId) {
+      fetchAdminSpreads();
+    }
+  }, [account?.accountTypeId?._id, account?.accountTypeId]);
+
   // Add keyboard shortcuts for chart navigation
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -724,7 +731,9 @@ const [tabOrder, setTabOrder] = useState(['Positions', 'Pending', 'History', 'Ca
   // Fetch admin-set spreads for instruments
   const fetchAdminSpreads = async () => {
     try {
-      const res = await fetch(`${API_URL}/charges/spreads`)
+      const accTypeId = account?.accountTypeId?._id || account?.accountTypeId || '';
+      const uid = user?._id || '';
+      const res = await fetch(`${API_URL}/charges/spreads?userId=${uid}&accountTypeId=${accTypeId}`)
       const data = await res.json()
       if (data.success && data.spreads) {
         const spreads = data.spreads
