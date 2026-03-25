@@ -66,9 +66,10 @@ async function createAdmin() {
 
     const hashedPassword = await bcrypt.hash(ADMIN_PASSWORD, 10)
 
-    const existingAdmin = await Admin.findOne({ email: ADMIN_EMAIL })
+    const existingAdmin = await Admin.findOne({ urlSlug: ADMIN_URL_SLUG })
     if (existingAdmin) {
       console.log('Admin already exists! Updating credentials...')
+      existingAdmin.email = ADMIN_EMAIL
       existingAdmin.password = hashedPassword
       await existingAdmin.save()
       console.log('\n✅ Admin credentials re-created/updated!')
